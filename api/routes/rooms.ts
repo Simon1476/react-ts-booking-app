@@ -5,6 +5,7 @@ import {
   getRoom,
   getRooms,
   updateRoom,
+  updateRoomAvailability,
 } from "../controllers/room";
 import { verifyAdmin } from "../utils/verityToken";
 
@@ -15,6 +16,7 @@ roomsRouter.post("/:hotelId", verifyAdmin, createRoom);
 
 // UPDATE
 roomsRouter.put("/:id", verifyAdmin, updateRoom);
+roomsRouter.put("/availability/:roomId", updateRoomAvailability);
 
 //DELETE
 roomsRouter.delete("/:id/:hotelId", verifyAdmin, deleteRoom);
