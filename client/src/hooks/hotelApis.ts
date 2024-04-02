@@ -1,6 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Hotel, HotelCountByType } from "../types/hotelType";
+import { Room } from "../types/roomType";
 
 export const queryClient = new QueryClient();
 
@@ -49,6 +50,15 @@ export const fetchHotelData = async (url: string): Promise<Hotel[]> => {
   }
 };
 
+export const fetchHotelRooms = async (url: string): Promise<Room[]> => {
+  try {
+    const response = await axios.get("http://localhost:8800/api" + url);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 // export const fetchHotelByPriceRange = async (
 //   url: string
 // ): Promise<HotelsByPriceRange[]> => {
