@@ -10,15 +10,18 @@ import {
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchHotelByHotelId } from "../../hooks/hotelApis";
 import { useAppSelector } from "../../typedHooks/hooks";
 import { dayDifference, getDateInMilliseconds } from "../../utils/helpers";
+import Reserve from "../../components/reserve/Reserve";
 
 const Hotel = () => {
   const [slideNumber, setslideNumber] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
+  const [isReserving, setIsReserving] = useState<boolean>(false);
+
   const { hotelId } = useParams();
 
   const { data, isPending, isError, error } = useQuery({
@@ -26,12 +29,16 @@ const Hotel = () => {
     queryFn: () => fetchHotelByHotelId(`/hotels/${hotelId}`),
   });
 
+  const { user } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
+
   const dates = useAppSelector((state) => state.search.dates);
   const options = useAppSelector((state) => state.search.options);
 
   const endDate = getDateInMilliseconds(dates[0].endDate);
   const startDate = getDateInMilliseconds(dates[0].startDate);
   const days = dayDifference(endDate, startDate);
+
   const handleOpen = (index: number) => {
     setslideNumber(index);
     setOpen(true);
@@ -49,6 +56,17 @@ const Hotel = () => {
     setslideNumber(newSlideNumber);
   };
 
+  const handleStartReserve = () => {
+    if (user) {
+      setIsReserving(true); // Callback ensures re-render
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const handleCloseReserve = () => {
+    setIsReserving(false);
+  };
   let content;
 
   if (isPending) {
@@ -101,7 +119,7 @@ const Hotel = () => {
             <h2>
               <b>${days * data.cheapestPrice * options.room}</b> ({days}nights)
             </h2>
-            <button>Reserve or Book Now!</button>
+            <button onClick={handleStartReserve}>Reserve or Book Now!</button>
           </div>
         </div>
       </div>
@@ -143,6 +161,9 @@ const Hotel = () => {
         <MailList />
         <Footer />
       </div>
+      {isReserving && (
+        <Reserve onClose={handleCloseReserve} hotelId={hotelId} />
+      )}
     </div>
   );
 };
