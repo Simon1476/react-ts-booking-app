@@ -17,7 +17,7 @@ const Featured = () => {
 
   if (data) {
     content = (
-      <>
+      <div className={styles.featured}>
         <div className={styles.item}>
           <img
             src="https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -51,10 +51,17 @@ const Featured = () => {
             <h2>{data[2]} properties</h2>
           </div>
         </div>
-      </>
+      </div>
     );
   }
-  return <div className={styles.featured}>{content}</div>;
+  return (
+    <div>
+      <header>
+        <h2>Browse by City type</h2>
+      </header>
+      {content}
+    </div>
+  );
 };
 
 export default Featured;

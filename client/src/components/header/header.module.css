@@ -1,8 +1,9 @@
 .header {
  height: 50px;
- background-color: #003580;
+ background-color: var(--background-color);
  display: flex;
  justify-content: center;
+ padding: 0 8px;
 }
 
 .container {
@@ -11,18 +12,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: var(--text-color);
+}
+
+.logo {
+  font-weight: bold;
 }
 
 .items {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
 .button {
-  margin-left: 20px;
+  background-color: inherit;
+  font-size: 18x;
+  font-weight: bold;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
-  color: #003580;
+  color: var(--text-color);
 }

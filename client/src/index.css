@@ -1,3 +1,8 @@
+:root {
+  --background-color: #022F63;
+  --text-color: #DBE8F1;
+}
+
 
 * {
   margin: 0;

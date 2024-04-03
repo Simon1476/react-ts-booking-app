@@ -26,7 +26,7 @@ const PropertyList = () => {
 
   if (data) {
     content = (
-      <>
+      <div className={styles.pList}>
         {images.map((img, i) => (
           <div className={styles.item} key={i}>
             <img className={styles.img} src={img} alt="" />
@@ -38,10 +38,17 @@ const PropertyList = () => {
             </div>
           </div>
         ))}
-      </>
+      </div>
     );
   }
-  return <div className={styles.pList}>{content}</div>;
+  return (
+    <div>
+      <header>
+        <h2>Browse by property type</h2>
+      </header>
+      {content}
+    </div>
+  );
 };
 
 export default PropertyList;
