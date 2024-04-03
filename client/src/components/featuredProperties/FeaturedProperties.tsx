@@ -7,7 +7,7 @@ const FeaturedProperties = () => {
     queryKey: ["hotelsByPriceRange"],
     queryFn: () => fetchHotelData("/hotels?featured=true&limit=5"),
   });
-
+  console.log(data);
   let content;
 
   if (isPending) {
@@ -35,7 +35,14 @@ const FeaturedProperties = () => {
       </div>
     ));
   }
-  return <div className={styles.fp}>{content}</div>;
+  return (
+    <div style={{ width: "1024px" }}>
+      <header>
+        <h2>Homes guests love</h2>
+      </header>
+      <div className={styles.fp}>{content}</div>
+    </div>
+  );
 };
 
 export default FeaturedProperties;
