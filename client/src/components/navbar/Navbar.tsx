@@ -111,11 +111,10 @@ const Navbar = ({ type }: NavbarProps) => {
         {type !== "list" && (
           <>
             <h1 className={styles.title}>
-              The quality of life! just enjoy for yourself.
+              Set your dreams in motion, let your journey begin
             </h1>
             <p className={styles.desc}>
-              Get rewarded for your travels – unlock instant savings of 10% or
-              more with a free Lamabooking account
+              The moment you take your first step, your dream becomes reality
             </p>
             {!user && (
               <button className={styles.button}>Sign in / Register</button>

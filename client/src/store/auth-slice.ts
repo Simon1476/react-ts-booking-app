@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserData, loginUser } from "./auth-action";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { PURGE } from "redux-persist";
 
 type User = {
   _id: string;
@@ -34,6 +35,11 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(PURGE, (state) => {
+        state.user = null;
+        state.loading = false;
+        state.error = null;
+      })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
       })

@@ -50,7 +50,7 @@ export const login = async (
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
-      .json({ ...otherDetails });
+      .json({ ...otherDetails, token });
   } catch (err) {
     next(err);
   }

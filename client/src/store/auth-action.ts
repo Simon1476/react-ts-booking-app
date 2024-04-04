@@ -9,6 +9,7 @@ export interface UserData {
   email: string;
   createdAt: string;
   updatedAt: string;
+  token: string;
 }
 
 interface userAttributes {
