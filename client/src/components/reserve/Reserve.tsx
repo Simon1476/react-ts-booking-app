@@ -16,13 +16,12 @@ type RoomNumber = {
   unavailableDates: Date[];
 };
 
-const Reserve = ({
-  onClose,
-  hotelId,
-}: {
+type Props = {
   onClose: () => void;
   hotelId?: string;
-}) => {
+};
+
+const Reserve = ({ onClose, hotelId }: Props) => {
   const [selectdRooms, setSelectdRooms] = useState<string[]>([]);
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["hotelRooms", hotelId],
