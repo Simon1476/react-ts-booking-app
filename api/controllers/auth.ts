@@ -13,8 +13,7 @@ export const register = async (
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
+      ...req.body, // 비밀번호를 제외한 모든 유저 프로퍼티들을 받는다.
       password: hashedPassword,
     });
 
@@ -50,7 +49,7 @@ export const login = async (
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
-      .json({ ...otherDetails, token });
+      .json({ details: { ...otherDetails }, token, isAdmin });
   } catch (err) {
     next(err);
   }
